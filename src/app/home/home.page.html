@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Camper {{camper.nummerplaat}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-item color="light" lines="full" (click)="toggle('price')">
+      <ion-icon name="cash-outline" slot="start"></ion-icon>
+      <ion-label>
+        <div class="newline">
+          <div>aankoop</div>
+          <div>{{camper.price}}</div>
+        </div>
+        <div class="newline">
+          <div>bpm</div>
+          <div>{{camper.bpm}}</div>
+        </div>
+        <div class="newline">
+          <div>extra</div>
+          <div>{{addPrice}}</div>
+        </div>
+        <div class="newline line">
+          <div>totaal</div>
+          <div>{{total}}</div>
+        </div>
+      </ion-label>
+    </ion-item>
+    <div *ngIf="show.price">
+      <form [formGroup]="form">
+        <ion-item>
+          <ion-label position="stacked" translate>aankoop</ion-label>
+          <ion-input type="text" formControlName="price" (ionChange)="resetPrices()"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" translate>bpm</ion-label>
+          <ion-input type="text" formControlName="bpm" (ionChange)="resetPrices()"></ion-input>
+        </ion-item>
+      </form>
+    </div>
+
+  </ion-card>
+
+  <ion-card *ngFor="let type of types">
+    <ion-item color="light" (click)="toggle(type)">
+      <div class="newline">
+        <div>{{type}}</div>
+        <div>{{camper.addPrice[type]}}</div>
+      </div>
+    </ion-item>
+    <div *ngIf="show[type]">
+      <ion-item *ngFor="let property of camper[type]" lines="full" [ngClass]="{'selected': property.add === true}">
+        <ion-icon name="checkmark-circle-outline" *ngIf="property.available" slot="start"(click)="toggleAvailable(property, type)"></ion-icon>
+        <ion-icon name="ellipse-outline" *ngIf="!property.available" slot="start"(click)="toggleAvailable(property, type)"></ion-icon>
+        <ion-icon name="add-outline" *ngIf="property.add" slot="start"(click)="toggleAdd(property, type)"></ion-icon>
+        <ion-icon name="remove-outline" *ngIf="!property.add" slot="start"(click)="toggleAdd(property, type)"></ion-icon>
+        <ion-label>
+          <div class="newline">
+            <div>{{property.label}}</div>
+            <div>{{property.addPrice}}</div>
+          </div>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,14 @@
+div.newline {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.line {
+  border-top: solid 1px black;
+}
+
+.selected {
+  background-color: #333;
+}

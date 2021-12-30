@@ -1,0 +1,7 @@
+{
+  "name": "camperconfigurator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
